@@ -2,12 +2,20 @@ import os
 import sys
 import json
 from chatterbot import Chatbot
-chatbot = ChatBot('Charlie')
+
 
 import requests
 from flask import Flask, request
 
 app = Flask(__name__)
+
+# Chatterbot stub
+chatbot = ChatBot(
+    'Ron Obvious',
+    trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
+)
+# Train based on the english corpus
+chatbot.train("chatterbot.corpus.english")
 
 
 @app.route('/', methods=['GET'])
