@@ -1,6 +1,8 @@
 import os
 import sys
 import json
+from chatterbot import Chatbot
+chatbot = ChatBot('Charlie')
 
 import requests
 from flask import Flask, request
@@ -38,9 +40,9 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-
-                    send_message(sender_id, "roger that!")
-
+                    chat_response = chatbot.get_response(message_text)   # added new
+                    #send_message(sender_id, "roger that!")
+                    send_message(sender_id, chat_response)
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
