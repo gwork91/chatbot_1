@@ -10,15 +10,11 @@ from flask import Flask, render_template
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
-app = Flask(__name__)
-
 # Chatterbot stub
-chatbot = ChatBot(
-    'Ron Obvious',
-    trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
-)
-# Train based on the english corpus
-chatbot.train("chatterbot.corpus.english")
+app = Flask(__name__)
+english_bot = ChatBot("English Bot")
+english_bot.set_trainer(ChatterBotCorpusTrainer)
+english_bot.train("chatterbot.corpus.english")
 
 
 @app.route('/', methods=['GET'])
@@ -51,7 +47,7 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    chat_response = chatbot.get_response(message_text)   # added new
+                    chat_response = english_bot.get_response(message_text)   # added new
                     #send_message(sender_id, "roger that!")
                     send_message(sender_id, chat_response)
                 if messaging_event.get("delivery"):  # delivery confirmation
