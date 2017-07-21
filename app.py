@@ -1,11 +1,14 @@
 import os
+import time
 import sys
 import json
-from chatterbot import ChatBot
-
-
+import re
+import random
 import requests
 from flask import Flask, request
+from flask import Flask, render_template
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 app = Flask(__name__)
 
