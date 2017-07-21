@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from chatterbot import Chatbot
+from chatterbot import ChatBot
 
 
 import requests
